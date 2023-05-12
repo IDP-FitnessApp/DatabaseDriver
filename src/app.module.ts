@@ -14,21 +14,16 @@ import { Workout } from './core/workout/entity/workout.entity';
       name: 'idp_database',
       useFactory: (): TypeOrmModuleOptions => ({
         type: 'mysql',
-        host: 'localhost',
+        host: 'mysql',
         port: 3306,
-        username: 'idp_user',
-        password: 'idp_password',
+        username: 'root',
+        password: 'password',
         database: 'idp_database',
-        entities: [
-          User,
-          Gym,
-          Subscription,
-          Workout
-        ],
+        entities: [User, Gym, Subscription, Workout],
         synchronize: true,
-      })
+      }),
     }),
-    CoreModule
+    CoreModule,
   ],
   controllers: [AppController],
   providers: [AppService],
