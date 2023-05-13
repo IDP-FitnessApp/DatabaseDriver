@@ -5,9 +5,6 @@ export class CreateSubscriptionDTO {
     gym_id: number;
 
     @IsNotEmpty()
-    user_id: number;
-
-    @IsNotEmpty()
     price: number;
 
     @IsNotEmpty()

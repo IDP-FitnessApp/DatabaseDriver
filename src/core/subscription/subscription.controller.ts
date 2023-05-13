@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Req } from "@nestjs/common";
 import { SubscriptionService } from "./subscription.service";
 import { CreateSubscriptionDTO } from "./dto/CreateSubscriptionDTO";
 
@@ -9,7 +9,12 @@ export class SubscriptionController {
     ) {}
 
     @Post('create')
-    async createSubscription(@Body() subscriptionData: CreateSubscriptionDTO) {
-        return this.subscriptionService.createSubscription(subscriptionData);
+    async createSubscription(@Req() request: {userId: string}, @Body() subscriptionData: CreateSubscriptionDTO) {
+        return this.subscriptionService.createSubscription(request.userId, subscriptionData);
+    }
+
+    @Get('/user')
+    async getSubscriptionsOfUser(@Req() request: {userId: string}) {
+        return this.subscriptionService.getSubscriptionsOfUser(request.userId);
     }
 }

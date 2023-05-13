@@ -11,11 +11,11 @@ export class SubscriptionService {
         private readonly subscriptionRepository: Repository<Subscription>,
     ) {}
 
-    async createSubscription(subscriptionData: CreateSubscriptionDTO) {
+    async createSubscription(userId: string, subscriptionData: CreateSubscriptionDTO) {
         try {
             const newGym = await this.subscriptionRepository.save(this.subscriptionRepository.create({
                 gym_id: subscriptionData.gym_id,
-                user_id: subscriptionData.user_id,
+                user_id: userId,
                 price: subscriptionData.price,
                 currency: subscriptionData.currency,
                 name: subscriptionData.name,
@@ -27,5 +27,13 @@ export class SubscriptionService {
         catch(error) {
             throw new HttpException('create_gym_failed', HttpStatus.CONFLICT);
         }
+    }
+
+    async getSubscriptionsOfUser(userId: string) {
+        return await this.subscriptionRepository.find({
+            where: {
+                user_id: userId
+            }
+        });
     }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { GymService } from "./gym.service";
 import { CreateGymDTO } from "./dto/CreateGymDTO";
 
@@ -11,5 +11,10 @@ export class GymController {
     @Post('create')
     async createGym(@Body() gymData: CreateGymDTO) {
         return this.gymService.createGym(gymData);
+    }
+
+    @Get('all')
+    async getAllGyms() {
+        return this.gymService.getAllGyms();
     }
 }

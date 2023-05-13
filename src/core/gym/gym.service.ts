@@ -28,4 +28,8 @@ export class GymService {
             throw new HttpException('create_gym_failed', HttpStatus.CONFLICT);
         }
     }
+
+    async getAllGyms() {
+        return await this.gymRepository.find();
+    }
 }

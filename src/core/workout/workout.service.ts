@@ -27,4 +27,12 @@ export class WorkoutService {
             throw new HttpException('create_gym_failed', HttpStatus.CONFLICT);
         }
     }
+
+    async getWorkoutsOfSubscription(subscriptionId) {
+        return await this.workoutRepository.find({
+            where: {
+                subscription_id: subscriptionId
+            }
+        });
+    }
 }

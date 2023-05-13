@@ -1,5 +1,4 @@
 import { Gym } from "src/core/gym/entity/gym.entity";
-import { User } from "src/core/user/entity/user.entity";
 import { Workout } from "src/core/workout/entity/workout.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -50,17 +49,11 @@ export class Subscription {
     })
     end_date: string;
 
-    @Column({ name: 'user_id' })
-    user_id: number;
+    @Column()
+    user_id: string;
 
     @Column({ name: 'gym_id' })
     gym_id: number;
-
-    @ManyToOne(() => User, (user) => user.subscriptions, {
-        onDelete: 'CASCADE',
-    })
-    @JoinColumn({ name: 'user_id' })
-    user: User;
 
     @ManyToOne(() => Gym, (gym) => gym.subscriptions, {
         onDelete: 'CASCADE',
